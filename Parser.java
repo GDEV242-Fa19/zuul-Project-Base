@@ -13,8 +13,8 @@ import java.util.Scanner;
  * the known commands, and if the input is not one of the known commands, it
  * returns a command object that is marked as an unknown command.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Tim Mahoney
+ * @version 2019.11.9
  */
 public class Parser 
 {
@@ -59,8 +59,40 @@ public class Parser
     /**
      * Print out a list of valid command words.
      */
-    public void showCommands()
+    public String showCommands()
     {
-        commands.showAll();
+        return (commands.getCommandList());
     }
+    
+    /**
+     * Returns a description of the items contained in a room
+     * @return A description of the item with its weight
+     */
+    public String getItemDescription()
+    {
+        // put your code here
+        String itemString = "\tName: " + this.name;
+        itemString += "\n\tDescription: ";
+        itemString += this.itemDescription + "\n";
+        itemString += \tWeight: " + this.itemWeight + "\n";
+        return itemString;
+        
+    }
+// The getter method to get the name of the item
+public String getItemName()
+{
+    return name;
+}
+
+// The getter method to get the description of the item
+public String getDescriptionofItem()
+{
+    return itemDescription;
+}
+
+// The getter method to get the weight of the item
+public int getWeight()
+{
+    return itemWeight;
+}
 }
