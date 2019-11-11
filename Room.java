@@ -1,5 +1,6 @@
 import java.util.Set;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -12,14 +13,19 @@ import java.util.Iterator;
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Tim Mahoney
+ * @version 2019.11.9
  */
 
-public class Room 
+public class Room extends Item 
 {
+    // stores name of the room
     private String description;
-    private HashMap<String, Room> exits;        // stores exits of this room.
+    // stores exits of this room
+    private HashMap<String, Room> exits; 
+    // holds collection of item objects present in the room
+    private ArrayList<Item> roomItems;
+    private Item roomItem;
 
     /**
      * Create a room described "description". Initially, it has
@@ -30,7 +36,17 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
-        exits = new HashMap<>();
+        exits = new HashMap<String, Room>();
+        roomItems = new ArrayList<Item>();
+    }
+
+    /**
+     * Get the ArrayList of the items added to the current room
+     */
+    public ArrayList<Item> getRoomItems()
+    {
+        // put your code here
+        return roomItems;
     }
 
     /**
@@ -76,6 +92,65 @@ public class Room
             returnString += " " + exit;
         }
         return returnString;
+    }
+
+    /**
+     * Return a string for items present in the room
+     **/
+    public String getItemsInRoom()
+    {
+        // put your code here
+        String returnItems = "Items in the room are: \n";
+        {
+            returnItems += item.getItemDescription()+"\n";
+        }
+        return returnItems;
+    }
+
+    /**
+     * Add name of items and description of item and its weight to its corresponding room
+     * @param item_name Specifies the name of the item
+     * @param description specifies description of item
+     * @param weight holds the weight of the item
+     */
+    public void addItem(Item item)
+    {
+        // put your code here
+        roomItems.add(item);
+    }
+
+    /**
+     * Get the item object if the itemName is found in the list of items present in the room
+     */
+    public Item getItem(String itemName)
+    {
+        // loop the list of the items in the room
+        for (int i = 0; i < roomItems.size(); i++)
+        {
+        // condition to check the itemName matched with any of the items from the list that are present in the room
+        if (roomItems.get(i).getItemName().equalsIgnoreCase(itemName))
+        {
+            // if matched return the Item object present at index i
+            return roomItems.get(i);
+        }
+    }
+    // otherwise return null
+    return null;
+    }
+   
+    // To remove an item from the list of which the user has picked up
+    public void removeItem(Item item)
+    {
+        // loop the list of the items in the room
+        for (int i = 0; i < roomItems.size(); i++)
+        {
+            // item matches with any of the item in the room then remove the item from list and break loop
+            if (roomItems.get(i) == item)
+            {
+                roomItems.remove(item);
+                break;
+            }
+        }
     }
 
     /**

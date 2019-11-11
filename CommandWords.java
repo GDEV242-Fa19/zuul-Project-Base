@@ -7,16 +7,17 @@ import java.util.HashMap;
  * This class holds an enumeration of all command words known to the game.
  * It is used to recognise commands as they are typed in.
  *
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Tim Mahoney
+ * @version 2019.11.9
  */
 
 public class CommandWords
 {
     // A mapping between a command word and the CommandWord
     // associated with it.
-    private HashMap<String, CommandWord> validCommands;
+    private HashMap<String, CommandWord> validCommands = ["go", "quit", "help", "look", "eat", "back", "take", "drop", "items", "eatcookie", "charge", "fire"];
 
+        
     /**
      * Constructor - initialise the command words.
      */
@@ -28,6 +29,21 @@ public class CommandWords
                 validCommands.put(command.toString(), command);
             }
         }
+    }
+
+    /**
+     * 
+     * @return    Returns out a list of valid command words in the form of a string
+     */
+    public String getCommandList()
+    {
+        // put your code here
+        String returnString = "";
+        for(String command: validCommands)
+        {
+            returnString = returnString + command + " ";
+        }
+        return returnString;
     }
 
     /**
